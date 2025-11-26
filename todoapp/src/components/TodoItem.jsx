@@ -5,12 +5,19 @@ export default function TodoItem({ item, todos, setTodos }) {
     setTodos(todos.filter((todo) => todo !== item));
   }
   function handleClick(name) {
-    console.log("Item text clicked", name);
+    const newArray = todos.map((todo) =>
+      todo.name === name ? { ...todo, done: !todo.done } : todo
+    );
+    setTodos(newArray);
+    //console.log(todos);
   }
+  const className = item.done ? styles.completed : "";
   return (
     <div className={styles.item}>
       <div className={styles.itemName}>
-        <span onClick={() => handleClick(item.name)}>{item.name}</span>
+        <span className={className} onClick={() => handleClick(item.name)}>
+          {item.name}
+        </span>
 
         <span>
           <button
